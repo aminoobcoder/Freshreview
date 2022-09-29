@@ -1,0 +1,25 @@
+<p-card *ngIf="post" >
+    <p-fieldset legend="{{post.title}}" [toggleable]="true">
+        <p>{{post.body}}</p>
+        <p-button (onClick)="getComments(post.id)" label="View Comments" ></p-button>
+    </p-fieldset>
+</p-card>
+<p-dialog [(visible)]="commentsdialog" [style]="{width: '1000px'}" header="Comments" [modal]="true" styleClass="p-fluid">
+    <p-table [value]="comments" dataKey="id">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Comment</th>
+            </tr>
+        </ng-template>
+        <ng-template let-comment pTemplate="body" let-expanded="expanded" let-index="rowIndex">
+            <tr>
+                <td> {{ comment.name }} </td>
+                <td> {{ comment.email }} </td>
+                <td> {{ comment.body }} </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</p-dialog>
+<p-toast key="errorMessage" position="top-left"></p-toast>
